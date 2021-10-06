@@ -36,6 +36,7 @@ def main():
     total_line = 0
     total_word = 0
     total_char = 0
+    
     for fh in args.files:
         #print(fh.name)
         line_nums = 0
