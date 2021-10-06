@@ -6,7 +6,7 @@ Purpose: Rock the Casbah
 """
 
 import argparse
-import pprint
+#import pprint
 
 
 # --------------------------------------------------
@@ -27,8 +27,7 @@ def get_args():
                         metavar='FILE',
                         required=True,
                         type=argparse.FileType('rt'),
-                        default=None
-                        )
+                        default=None)
 
     parser.add_argument('-o',
                         '--outfile',
@@ -45,29 +44,25 @@ def main():
     """Make a jazz noise here"""
 
     args = get_args()
-    print('seq =', args.sequence)
-    print('codons =', args.codons)
-    print('outfile =', args.outfile)
+    # print('seq =', args.sequence)
+    # print('codons =', args.codons)
+    # print('outfile =', args.outfile)
 
-    Dict = {}
+    codon_table = {}
     for line in args.codons:
     #   print(line.rstrip().split())
-        KAI = line.rstrip().split()
-        Dict[KAI[0]] = KAI[1]
-    pp = pprint.PrettyPrinter() 
-    #pp.pprint(Dict)
+        key, value = line.rstrip().split()
+        codon_table[key] = value
+    #pp = pprint.PrettyPrinter() 
+    #pprint.pprint(codon_table)
 
     k = 3
-    seq = args.sequence
+    seq = args.sequence.upper()
     translation = []
     for codon in [seq[i:i + k] for i in range(0, len(seq), k)]:
-        for key, value in Dict.items():
-            if key == codon.upper():
-                #print(codon.upper(), value)
-                translation.append(value)
-        #print(codon)
+        translation.append(codon_table.get(codon))
     print(''.join(translation), file=args.outfile)
-    print(''.join(translation))
+    print(f'Output written to "{args.outfile.name}".')
 
 
 
