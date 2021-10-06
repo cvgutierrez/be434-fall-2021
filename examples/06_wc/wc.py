@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Emulate wc (word count)"""
+"""
+Author : root <root@localhost>
+Date   : 2021-10-04
+Purpose: Rock the Casbah
+"""
 
 import argparse
 import sys
@@ -10,15 +14,15 @@ def get_args():
     """Get command-line arguments"""
 
     parser = argparse.ArgumentParser(
-        description='Emulate wc (word count)',
+        description='Counting',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument('file',
+    parser.add_argument('files',
+                        help='A readable file',
                         metavar='FILE',
-                        nargs='*',
-                        default=[sys.stdin],
                         type=argparse.FileType('rt'),
-                        help='Input file(s)')
+                        default=(sys.stdin),
+                        nargs='*')
 
     return parser.parse_args()
 
@@ -28,23 +32,30 @@ def main():
     """Make a jazz noise here"""
 
     args = get_args()
-
-    total_lines, total_bytes, total_words = 0, 0, 0
-    for fh in args.file:
-        num_lines, num_words, num_bytes = 0, 0, 0
+    
+    total_line = 0
+    total_word = 0
+    total_char = 0
+    for fh in args.files:
+        #print(fh.name)
+        line_nums = 0
+        word_count = 0
+        char_count = 0
         for line in fh:
-            num_lines += 1
-            num_bytes += len(line)
-            num_words += len(line.split())
+            line_nums += 1
+            #print(line.split())
+            word_count += len(line.split())
+            char_count += len(line)
+        print("{:>8}{:>8}{:>8} {}".format(line_nums, word_count, char_count,
+                                    fh.name))
+        total_line += line_nums
+        total_word += word_count
+        total_char += char_count
+    #print(fh.name, line_nums, word_count, char_count)
+    if len(args.files) >1:
+        print("{:>8}{:>8}{:>8}".format(total_line, total_word, 
+                                        total_char))
 
-        total_lines += num_lines
-        total_bytes += num_bytes
-        total_words += num_words
-
-        print(f'{num_lines:8}{num_words:8}{num_bytes:8} {fh.name}')
-
-    if len(args.file) > 1:
-        print(f'{total_lines:8}{total_words:8}{total_bytes:8} total')
 
 
 # --------------------------------------------------
