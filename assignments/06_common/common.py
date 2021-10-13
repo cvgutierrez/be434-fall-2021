@@ -69,9 +69,7 @@ def main():
     # print('\n'.join(similarities))
     print('\n'.join(similarities), file=args.outputfile)
     # print('\n'.join(similarities), file=open(args.outputfile, 'wt') if args.outputfile else sys.stdout)
-    print(f'Output written to "{args.outputfile.name}".')
-    
-
+    # print(f'Output written to "{args.outputfile.name}".')
     
 
 
