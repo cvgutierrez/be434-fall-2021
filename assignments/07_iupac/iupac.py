@@ -65,9 +65,12 @@ def main():
         Sequence = ""
         for char in seq:
             # print(char)
-            if char in IUPAC_Table:
+            if char.upper() in IUPAC_Table:
                 translation += IUPAC_Table.get(char)
                 Sequence += char
+            else:
+                translation += '-'
+                Sequence += char.lower()
         print(Sequence, translation, file=args.outfile)
 
     if args.outfile != sys.stdout:
