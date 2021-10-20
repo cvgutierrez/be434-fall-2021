@@ -20,14 +20,14 @@ def get_args():
     parser.add_argument('SEQ',
                         metavar='SEQ',
                         help='Input sequence(s)',
-                        nargs= '+')
+                        nargs='+')
 
     parser.add_argument('-o',
                         '--outfile',
                         help='A readable file',
                         metavar='FILE',
                         type=argparse.FileType('wt'),
-                        default= sys.stdout)
+                        default=sys.stdout)
 
     return parser.parse_args()
 
@@ -42,34 +42,34 @@ def main():
     # print(SEQ)
 
     IUPAC_Table = {
-        "A":"A",
-        "T":"T",
-        "G":"G",
-        "C":"C",
-        "U":"U",
-        "R":"[AG]",
-        "Y":"[CT]",
-        "S":"[GC]",
-        "W":"[AT]",
-        "K":"[GT]",
-        "M":"[AC]",
-        "B":"[CGT]",
-        "D":"[AGT]",
-        "H":"[ACT]",
-        "V":"[ACG]",
-        "N":"[ACGT]"
+        "A": "A",
+        "T": "T",
+        "G": "G",
+        "C": "C",
+        "U": "U",
+        "R": "[AG]",
+        "Y": "[CT]",
+        "S": "[GC]",
+        "W": "[AT]",
+        "K": "[GT]",
+        "M": "[AC]",
+        "B": "[CGT]",
+        "D": "[AGT]",
+        "H": "[ACT]",
+        "V": "[ACG]",
+        "N": "[ACGT]"
     }
-    
-    for index in range(len(SEQ)):
+
+    for seq in SEQ:
         translation = ""
         Sequence = ""
-        for char in SEQ[index]:
+        for char in seq:
             # print(char)
             if char in IUPAC_Table:
                 translation += IUPAC_Table.get(char)
                 Sequence += char
         print(Sequence, translation, file=args.outfile)
-    
+
     if args.outfile != sys.stdout:
         print(f'Done, see output in "{args.outfile.name}"')
 
