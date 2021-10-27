@@ -1,72 +1,29 @@
-#!/usr/bin/env python3
-"""
-Author : caro <caro@localhost>
-Date   : 2021-10-26
-Purpose: Rock the Casbah
-"""
+#!/usr/bin/env bash
 
-import argparse
+set -u
 
+PRG="./kmers.py"
+OUTDIR="./expected"
+FOO="./inputs/foo.txt"
+BAR="./inputs/bar.txt"
+AMERICAN="./inputs/american.txt"
+BRITISH="./inputs/british.txt"
+SAMPLE1="./inputs/sample1.txt"
+SAMPLE2="./inputs/sample2.txt"
 
-# --------------------------------------------------
-def get_args():
-    """Get command-line arguments"""
+[[ ! -d "$OUTDIR" ]] && mkdir -p "$OUTDIR"
 
-    parser = argparse.ArgumentParser(
-        description='Rock the Casbah',
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+$PRG $FOO $BAR > $OUTDIR/foo_bar
+$PRG $FOO $BAR -k 1 > $OUTDIR/foo_bar.k1
+$PRG $FOO $BAR -k 2 > $OUTDIR/foo_bar.k2
+$PRG $FOO $BAR -k 4 > $OUTDIR/foo_bar.k4
 
-    parser.add_argument('positional',
-                        metavar='str',
-                        help='A positional argument')
+$PRG $AMERICAN $BRITISH > $OUTDIR/american_british
+$PRG $AMERICAN $BRITISH -k 1 > $OUTDIR/american_british.k1
+$PRG $AMERICAN $BRITISH -k 2 > $OUTDIR/american_british.k2
+$PRG $AMERICAN $BRITISH -k 4 > $OUTDIR/american_british.k4
 
-    parser.add_argument('-a',
-                        '--arg',
-                        help='A named string argument',
-                        metavar='str',
-                        type=str,
-                        default='')
-
-    parser.add_argument('-i',
-                        '--int',
-                        help='A named integer argument',
-                        metavar='int',
-                        type=int,
-                        default=0)
-
-    parser.add_argument('-f',
-                        '--file',
-                        help='A readable file',
-                        metavar='FILE',
-                        type=argparse.FileType('rt'),
-                        default=None)
-
-    parser.add_argument('-o',
-                        '--on',
-                        help='A boolean flag',
-                        action='store_true')
-
-    return parser.parse_args()
-
-
-# --------------------------------------------------
-def main():
-    """Make a jazz noise here"""
-
-    args = get_args()
-    str_arg = args.arg
-    int_arg = args.int
-    file_arg = args.file
-    flag_arg = args.on
-    pos_arg = args.positional
-
-    print(f'str_arg = "{str_arg}"')
-    print(f'int_arg = "{int_arg}"')
-    print('file_arg = "{}"'.format(file_arg.name if file_arg else ''))
-    print(f'flag_arg = "{flag_arg}"')
-    print(f'positional = "{pos_arg}"')
-
-
-# --------------------------------------------------
-if __name__ == '__main__':
-    main()
+$PRG $SAMPLE1 $SAMPLE2 > $OUTDIR/sample1_sample2
+$PRG $SAMPLE1 $SAMPLE2 -k 1 > $OUTDIR/sample1_sample2.k1
+$PRG $SAMPLE1 $SAMPLE2 -k 2 > $OUTDIR/sample1_sample2.k2
+$PRG $SAMPLE1 $SAMPLE2 -k 4 > $OUTDIR/sample1_sample2.k4

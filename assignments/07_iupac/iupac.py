@@ -39,7 +39,6 @@ def main():
     args = get_args()
 
     SEQ = list(args.SEQ)
-    # print(SEQ)
 
     IUPAC_Table = {
         "A": "A",
@@ -64,7 +63,6 @@ def main():
         translation = ""
         Sequence = ""
         for char in seq:
-            # print(char)
             if char.upper() in IUPAC_Table:
                 translation += IUPAC_Table.get(char)
                 Sequence += char
