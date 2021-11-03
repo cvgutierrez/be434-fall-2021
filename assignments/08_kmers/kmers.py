@@ -6,6 +6,7 @@ Purpose: Rock the Casbah
 """
 
 import argparse
+import os
 
 
 # --------------------------------------------------
@@ -96,9 +97,10 @@ def count_kmers(file, k):
 
 #     listOfKmers = []
 #
-#   for line in file:
+# for line in file:
 #       for i in range(line - kmer + 1):
 #         listOfKmers.append(file[i:i + kmer])
+#         # print(file_Contents[i:i+kmer])
 
 #     for index in range(len(listOfKmers)):
 #         if listOfKmers[index] in file_Dictionary:

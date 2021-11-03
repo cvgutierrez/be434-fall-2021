@@ -5,4 +5,8 @@ CCC            2     2
 TAA            1     1
 TCC            2     2
 TTC            1     1
+<<<<<<< HEAD
 TTT            4     4
+=======
+TTT            4     4
+>>>>>>> 63afc431fbdbbc0bd9021fa5d95f52f2d32e029e

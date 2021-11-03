@@ -2,4 +2,8 @@ I went to the theater last night with my neighbor and had a liter of
 beer, the color and flavor of which put us into such a good humor that
 we forgot our labors.  We set about to analyze our behavior, organize
 our thoughts, recognize our faults, catalog our merits, and generally
+<<<<<<< HEAD
 have a dialog without pretense as a license to improve ourselves.
+=======
+have a dialog without pretense as a license to improve ourselves.
+>>>>>>> 63afc431fbdbbc0bd9021fa5d95f52f2d32e029e

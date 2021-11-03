@@ -261,4 +261,8 @@ kmers.py::test_find_kmers PASSED                                         [100%]
 
 ## Author
 
+<<<<<<< HEAD
 Ken Youens-Clark <kyclark@gmail.com>
+=======
+Ken Youens-Clark <kyclark@gmail.com>
+>>>>>>> 63afc431fbdbbc0bd9021fa5d95f52f2d32e029e
