@@ -34,13 +34,6 @@ def main():
     for seq in args.text.splitlines():
         print(rle(seq))
 
-    # if os.path.isfile(args.text):
-    #     for line in args.text:
-    #         print(rle(line))
-    # else:
-    #     for seq in args.text:
-    #         print(rle(seq))
-
 # --------------------------------------------------
 def rle(seq):
     """ Create RLE """
@@ -56,6 +49,8 @@ def rle(seq):
             run.append(seq[index])
         else:
             run.append(seq[index])
+    if howmany != 1:
+        run.append(str(howmany))
 
     return ''.join(run)
 
