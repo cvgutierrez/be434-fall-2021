@@ -19,8 +19,7 @@ def get_args():
 
     parser.add_argument('text',
                         metavar='str',
-                        help='DNA text or file',
-                        nargs='+')
+                        help='DNA text or file')
 
     return parser.parse_args()
 
@@ -30,15 +29,17 @@ def main():
     """Make a jazz noise here"""
 
     args = get_args()
-    # for seq in args.text.splitlines():
-    #     print(rle(seq))
-
     if os.path.isfile(args.text):
-        for line in args.text:
-            print(rle(line))
-    else:
-        for seq in args.text:
-            print(rle(seq))
+        args.text = open(args.text).read().rstrip()
+    for seq in args.text.splitlines():
+        print(rle(seq))
+
+    # if os.path.isfile(args.text):
+    #     for line in args.text:
+    #         print(rle(line))
+    # else:
+    #     for seq in args.text:
+    #         print(rle(seq))
 
 # --------------------------------------------------
 def rle(seq):
