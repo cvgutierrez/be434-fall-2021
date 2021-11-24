@@ -20,30 +20,31 @@ def get_args():
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     parser.add_argument('PATTERN',
-                        metavar='str',
+                        metavar='PATTERN',
                         help='Search pattern')
 
     parser.add_argument('FILE',
-                        metavar='str',
-                        help='Input file(s)')
+                        metavar='FILE',
+                        type=argparse.FileType('rt'),
+                        help='Input file(s)',
+                        nargs='+')
 
     parser.add_argument('-i',
                         '--insensitive',
                         help='Case-insensitive search',
-                        metavar='str',
-                        type=str,
+                        action='store_true',
                         default=False)
 
     parser.add_argument('-o',
                         '--outfile',
                         help='Output',
                         metavar='FILE',
-                        type=argparse.FileType('w'),
+                        type=argparse.FileType('wt'),
                         default=sys.stdout)
 
     args = parser.parse_args()
-    if not os.path.exists(args.FILE):
-        parser.error(f"No such file or directory: '{args.FILE}'")
+    # if not os.path.exists(args.FILE):
+    #     parser.error(f"No such file or directory: '{args.FILE}'")
 
     return args
 
@@ -53,17 +54,16 @@ def main():
     """Make a jazz noise here"""
 
     args = get_args()
-    if os.path.isfile(args.FILE):
-        args.FILE = open(args.FILE, 'r')
-    lines = []
-    for line in args.FILE:
-        if args.insensitive == True:
-            if re.search(args.PATTERN, line, re.I):
-                lines.append(line.rstrip())
-        else:
-            if re.search(args.PATTERN, line):
-                lines.append(line.rstrip())
-    print("\n".join(lines), file=args.outfile)
+    for fh in args.FILE:
+        lines = []
+        for line in fh:
+            if args.insensitive == True:
+                if re.search(args.PATTERN, line, re.I):
+                    lines.append(line.rstrip())
+            else:
+                if re.search(args.PATTERN, line):
+                    lines.append(line.rstrip())
+        print("\n".join(lines), file=args.outfile)
 
 
 # --------------------------------------------------
