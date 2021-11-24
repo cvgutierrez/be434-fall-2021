@@ -43,8 +43,6 @@ def get_args():
                         default=sys.stdout)
 
     args = parser.parse_args()
-    # if not os.path.exists(args.FILE):
-    #     parser.error(f"No such file or directory: '{args.FILE}'")
 
     return args
 
@@ -54,16 +52,23 @@ def main():
     """Make a jazz noise here"""
 
     args = get_args()
+    fh_list = args.FILE
+    lines = []
     for fh in args.FILE:
-        lines = []
         for line in fh:
             if args.insensitive == True:
                 if re.search(args.PATTERN, line, re.I):
-                    lines.append(line.rstrip())
+                    if len(fh_list) > 1:
+                        lines.append((str(fh.name)+':') + line.rstrip())
+                    else:
+                        lines.append(line.rstrip())
             else:
                 if re.search(args.PATTERN, line):
-                    lines.append(line.rstrip())
-        print("\n".join(lines), file=args.outfile)
+                    if len(fh_list) > 1:
+                        lines.append((str(fh.name)+':') + line.rstrip())
+                    else:
+                        lines.append(line.rstrip())
+    print("\n".join(lines), file=args.outfile)
 
 
 # --------------------------------------------------
