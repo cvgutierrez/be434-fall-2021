@@ -32,22 +32,7 @@ def get_args():
                         metavar='str',
                         type=str,
                         default='English')
-    
-    # parser.add_argument('-f',
-    #                     '--file',
-    #                     metavar='FILE',
-    #                     type=argparse.FileType('rt'),
-    #                     help='Input file to translate',
-    #                     default=None,
-    #                     nargs='*')
-    
-    # parser.add_argument('-s',
-    #                     '--string',
-    #                     help="Input string to translate",
-    #                     metavar='str',
-    #                     type=str,
-    #                     default=None,
-    #                     nargs='*')
+
     parser.add_argument('-i',
                         '--input',
                         help="Input to translate",

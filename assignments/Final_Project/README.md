@@ -21,3 +21,7 @@ optional arguments:
   The output of the program should include an outputed directory containing three files: a file (1) with the original string/file, a file (2) with the translation of the original string/file into the desired output language, and a file (3) with the original string/file and the translated string/file.
 
   so if the program is run with the original string being Hello, the inputted language as English, and the outputted language as Spanish then in the outputted directory the three files should contain Hello in file (1), Hola in file (2), and english: Hello "\n" spanish: Hola in file (3).
+
+  Unforunately with the translate package, some accents and special characters are not always used by the program and I am not sure why this is or how to fix it. I have also come to the realization that there is a limited amount of times you can use the translate package each day and so one might get something along the lines of:
+  MYMEMORY WARNING: YOU USED ALL AVAILABLE FREE TRANSLATIONS FOR TODAY. NEXT AVAILABLE IN  17 HOURS 02 MINUTES 00 SECONDSVISIT HTTPS://MYMEMORY.TRANSLATED.NET/DOC/USAGELIMITS.PHP TO TRANSLATE MORE
+as the output of the input being translated instead of the actual translation. Due to this, the test.py may not work correctly.
