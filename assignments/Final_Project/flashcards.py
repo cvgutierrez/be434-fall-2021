@@ -59,29 +59,23 @@ def main():
         os.makedirs(args.outdir)
     input_lang = str(args.language1).lower()
     output_lang = str(args.language2).lower()
-    original = open(os.path.join(args.outdir, input_lang + ".txt"), 'wt')
-    output = open(os.path.join(args.outdir, output_lang + ".txt"), 'wt')
+    front_side = open(os.path.join(args.outdir, input_lang + ".txt"), 'wt')
+    back_side = open(os.path.join(args.outdir, output_lang + ".txt"), 'wt')
     together = open(os.path.join(args.outdir,"Side_by_Side.txt"), 'wt')
-
+    flashcards_dict = dict()
     if args.input == None:
         print("There was nothing to translate. Please try again and input either a file or string.")
     elif os.path.isfile(args.input):
         path = os.path.abspath(args.input)
-        translated = file_translate(path, args.language1, args.language2)
-        lines = []
         for line in open(args.input):
-            print(line.rstrip(), file= original)
-            lines.append(line.rstrip())
-        print(translated, file= output)
-        combined = [input_lang + ': ' + '\n'.join(lines), '\n', output_lang + ": " + translated]
-        print("\n".join(combined), file=together)
+            for word in line:
+                if word not in flashcards_dict:
+                    flashcards_dict[word] = string_translate(word, args.language1, args.language2)
     else:
-        translated = string_translate(args.input, args.language1, args.language2)
-        print(args.input, file=original)
-        print(translated, file = output)
-        combined = [input_lang + ': ' + args.input, '\n', output_lang + ": " + translated]
-        print("\n".join(combined), file=together)
-    print(f'Done, check "{args.outdir}"')
+        words = args.input.split()
+        for index in range(len(words)):
+            if words[index] not in flashcards_dict:
+                flashcards_dict[word] = string_translate(words[index], args.language1, args.language2)
 
 
 # --------------------------------------------------
@@ -89,23 +83,8 @@ def string_translate(string, in_lang, out_lang):
     '''translate strings'''
 
     interpreter = Translator(from_lang=in_lang.lower(), to_lang=out_lang.lower())
-    return interpreter.translate(string)
-
-  
-# --------------------------------------------------
-def file_translate(input_file, in_lang, out_lang):
-    '''translate file'''
-
-    interpreter = Translator(from_lang=in_lang, to_lang=out_lang)
-    lines = []
-    file = open(input_file, 'rt')
-    for line in file:
-        # print(line)
-        new_line = interpreter.translate(line.rstrip())
-        # print(new_line)
-        lines.append(new_line)
-
-    return "\n".join(lines)
+    translation = interpreter.translate(string)
+    return translation
 
   
 # --------------------------------------------------
