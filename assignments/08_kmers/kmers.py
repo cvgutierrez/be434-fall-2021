@@ -37,7 +37,7 @@ def get_args():
                         default=None)
 
     args = parser.parse_args()
-    if args.kmer < 1:
+    if args.kmer < 0:
         parser.error(f'--kmer "{args.kmer}" must be > 0')
 
     return args
@@ -49,8 +49,8 @@ def main():
 
     args = get_args()
 
-    kmers1 = count_kmers(args.FILE1, args.kmer)
-    kmers2 = count_kmers(args.FILE2, args.kmer)
+    kmers1 = count_kmers(args.FILE1.read().rstrip(), args.kmer)
+    kmers2 = count_kmers(args.FILE2.read().rstrip(), args.kmer)
 
     for common in set(kmers1).intersection(set(kmers2)):
         print('{:10}{:6}{:6}'.format(common, kmers1.get(common),
