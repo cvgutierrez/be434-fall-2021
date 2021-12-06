@@ -18,22 +18,24 @@ def get_args():
         description='Printing and or Counting Lines of Files',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument('-f',
-                        '--file',
+    parser.add_argument('file',
                         help='A readable file',
                         metavar='FILE',
-                        type=argparse.FileType('rt'),
-                        default=None)
+                        type=argparse.FileType('rt'))
 
     parser.add_argument('-n',
                         '--number',
                         help='Line numbers',
-                        action='store_true')
+                        action='store_true',
+                        default=False)
 
     args = parser.parse_args()
 
-    if os.path.isfile(args.file):
-        args.file = open(args.file).read().rstrip()
+    # if os.path.isfile(args.file.name):
+    #     args.file = open(args.file.name).read().rstrip()
+    #     print(args.file)
+    # if not os.path.isfile(args.file):
+    #     parser.error(f'No such file or directory: "{args.file.name}"')
 
     return args
 
@@ -43,16 +45,19 @@ def main():
     """Make a jazz noise here"""
 
     args = get_args()
-    fh = open(args.file, 'wt') if args.file else sys.stdout
-    nums = 1
-    for line in fh:
-        if -n:
-            fh.write(nums, args.file)
-            nums +=1
+    for fh in args.file:
+        lines = open(args.file.name, 'rt')
+        nums = 1
+        if len(fh) <1:
+            nums = 1
         else:
-            fh.write(args.file)
-
-    fh.close()
+            for line in lines:
+                if args.number:
+                    new_line = '     ' + str(nums) + '	' + line.rstrip()
+                    print(new_line)
+                    nums +=1
+                else:
+                    print(line.rstrip())
 
 
 # --------------------------------------------------
