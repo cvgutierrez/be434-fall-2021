@@ -72,6 +72,7 @@ def main():
         for line in open(args.input):
             print(line.rstrip(), file= original)
             lines.append(line.rstrip())
+        print('\n'.join(lines), file=original)
         print(translated, file= output)
         combined = [input_lang + ': ' + '\n'.join(lines), '\n', output_lang + ": " + translated]
         print("\n".join(combined), file=together)

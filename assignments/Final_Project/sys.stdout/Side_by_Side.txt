@@ -1,4 +1,4 @@
-english: Hello human
+english: Hello Person, you suck
 
 
-korean: 안녕하세요 인간
+japanese: こんにちは人、あなたは吸う
