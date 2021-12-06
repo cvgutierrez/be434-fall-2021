@@ -29,18 +29,12 @@ def get_args():
                         metavar='str',
                         type=str,
                         default='Stranger')
-    
+
     parser.add_argument('-e',
                         '--excited',
-                        help='The ending',
-                        metavar='str',
-                        type=str,
-                        default='False')
-
-    parser.add_argument('-o',
-                        '--on',
-                        help='A boolean flag',
-                        action='store_true')
+                        help='A boolean flag for ending',
+                        action='store_true',
+                        default=False)
 
     return parser.parse_args()
 
@@ -51,6 +45,10 @@ def main():
 
     args = get_args()
     ending = '!' if args.excited else '.'
+    # if args.excited:
+    #     ending = '!'
+    # else:
+    #     ending = '.'
     print(args.greeting + ', ' + args.name + ending)
 
 
