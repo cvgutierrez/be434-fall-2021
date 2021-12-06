@@ -60,7 +60,7 @@ def main():
     seq = args.sequence.upper()
     translation = []
     for codon in [seq[i:i + k] for i in range(0, len(seq), k)]:
-        translation.append(codon_table.get(codon))
+        translation.append(codon_table.get(codon, "-"))
     print(''.join(translation), file=args.outfile)
     print(f'Output written to "{args.outfile.name}".')
 
